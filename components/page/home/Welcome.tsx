@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import Login from "./Login";
-import User from "./user";
+import User from "./User";
 
 const Welcome = ({ authState }) => {
   return (
