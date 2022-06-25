@@ -1,5 +1,5 @@
 import { AuthPage, LoginForm } from "./Loginform.styled";
-import { Alert, Button, Checkbox, Divider, Form, Input } from "antd";
+import { Alert, Button, Divider, Form, Input } from "antd";
 import { useForm, SubmitHandler, Controller } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
@@ -29,7 +29,6 @@ const Loginform = () => {
     resolver: yupResolver(schema),
   });
   const onSubmit: SubmitHandler<Inputs> = (data) => console.log(data);
-
   return (
     <AuthPage>
       <LoginForm>
