@@ -19,9 +19,7 @@ const Login = () => {
         <Col span={12}>
           <Link href="/signup">
             <a>
-              <Button secondary icon={<LoginOutlined />}>
-                Sign Up
-              </Button>
+              <Button icon={<LoginOutlined />}>Sign Up</Button>
             </a>
           </Link>
         </Col>
