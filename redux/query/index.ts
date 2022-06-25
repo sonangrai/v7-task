@@ -6,7 +6,7 @@ const apiUrlLocal = "http://localhost:4000";
 //Login Api of GQL
 export const loginApi = async (data) => {
   const res = await axios.post(
-    apiUrlLocal,
+    apiUrl,
     {
       query: `mutation login($email: String!,$password: String!) {
                     login(email: $email, password: $password){
