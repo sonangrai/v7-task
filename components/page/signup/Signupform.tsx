@@ -1,4 +1,4 @@
-import { AuthPage, LoginForm } from "./Loginform.styled";
+import { AuthPage, LoginForm } from "../login/Loginform.styled";
 import { Alert, Button, Divider, Form, Input } from "antd";
 import { useForm, SubmitHandler, Controller } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -6,16 +6,22 @@ import * as yup from "yup";
 
 type Inputs = {
   email: string;
+  username: string;
   password: string;
 };
 
 const schema = yup
   .object({
     email: yup.string().email().required(),
+    username: yup
+      .string()
+      .required("No password provided.")
+      .min(4, "Password is too short - should be 4 chars minimum.")
+      .matches(/[a-zA-Z]/, "Password can only contain Latin letters."),
     password: yup
       .string()
       .required("No password provided.")
-      .min(3, "Password is too short - should be 8 chars minimum.")
+      .min(6, "Password is too short - should be 6 chars minimum.")
       .matches(/[a-zA-Z]/, "Password can only contain Latin letters."),
   })
   .required();
@@ -30,12 +36,13 @@ const Loginform = ({ authStore, loginDispatch }) => {
   });
 
   const onSubmit: SubmitHandler<Inputs> = (data) => {
-    loginDispatch(data);
+    //loginDispatch(data);
+    console.log(data);
   };
   return (
     <AuthPage>
       <LoginForm>
-        <Divider>Log In</Divider>
+        <Divider>Sign Up</Divider>
         <form onSubmit={handleSubmit(onSubmit)}>
           <Form.Item label="Email" required={true} wrapperCol={{ span: 24 }}>
             <Controller
@@ -46,6 +53,18 @@ const Loginform = ({ authStore, loginDispatch }) => {
 
             {errors.email && (
               <Alert type="error" message={errors.email?.message} />
+            )}
+          </Form.Item>
+
+          <Form.Item label="Username" required={true} wrapperCol={{ span: 24 }}>
+            <Controller
+              name="username"
+              control={control}
+              render={({ field }) => <Input {...field} />}
+            />
+
+            {errors.username && (
+              <Alert type="error" message={errors.username?.message} />
             )}
           </Form.Item>
 

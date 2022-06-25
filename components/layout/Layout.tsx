@@ -22,7 +22,7 @@ const Layout = ({ children, title, description }) => {
       </Head>
       {children}
       <CopyRight>
-        Done by:
+        Done by :{" "}
         <a href="https://sonahangrai.com.np" target="_blank" rel="noreferrer">
           Rai Sonahang
         </a>
