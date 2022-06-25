@@ -1,7 +1,11 @@
 import styled from "styled-components";
 
-const User = () => {
-  return <UserSection>user</UserSection>;
+const User = (authState) => {
+  return (
+    <UserSection>
+      <h1>Hello! {authState.user.username}</h1>
+    </UserSection>
+  );
 };
 
 export default User;

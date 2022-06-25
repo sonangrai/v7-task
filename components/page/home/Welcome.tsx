@@ -1,13 +1,28 @@
+import { Button } from "antd";
 import React from "react";
 import styled from "styled-components";
 import Login from "./Login";
 import User from "./User";
 
-const Welcome = ({ authState }) => {
+const Welcome = ({ authState, logoutDispatch }) => {
   return (
     <WelcomeSection>
       <WelcomeBox>Welcome To V7 - Task</WelcomeBox>
-      {authState.isAuthenticated ? <User {...authState} /> : <Login />}
+      {authState.isAuthenticated ? (
+        <>
+          <User {...authState} />
+          <Button
+            danger
+            onClick={() => {
+              logoutDispatch();
+            }}
+          >
+            Logout
+          </Button>
+        </>
+      ) : (
+        <Login />
+      )}
     </WelcomeSection>
   );
 };

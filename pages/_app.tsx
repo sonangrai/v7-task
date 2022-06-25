@@ -26,7 +26,6 @@ function MyApp({ Component, pageProps }: AppProps) {
   useEffect(() => {
     const localAuth = localStorage.getItem("v7auth");
     if (localAuth) {
-      console.log(localAuth);
       store.dispatch(loadUser(JSON.parse(localAuth)));
     }
 

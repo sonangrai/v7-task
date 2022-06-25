@@ -1,5 +1,11 @@
 import { createReducer } from "@reduxjs/toolkit";
-import { loadUser, login, loginError, loginSuccess } from "redux/actions/auth";
+import {
+  loadUser,
+  login,
+  loginError,
+  loginSuccess,
+  logout,
+} from "redux/actions/auth";
 
 const initialState: Iauth = {
   isAuthenticated: false,
@@ -39,6 +45,13 @@ const authReducers = createReducer(initialState, {
   [loadUser.type]: (state, action) => {
     state.isAuthenticated = true;
     state.user = action.payload;
+  },
+
+  //Logout
+  [logout.type]: (state) => {
+    state.isAuthenticated = false;
+    state.user = {};
+    localStorage.removeItem("v7auth");
   },
 });
 
