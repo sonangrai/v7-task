@@ -15,12 +15,12 @@ const schema = yup
     password: yup
       .string()
       .required("No password provided.")
-      .min(8, "Password is too short - should be 8 chars minimum.")
+      .min(3, "Password is too short - should be 8 chars minimum.")
       .matches(/[a-zA-Z]/, "Password can only contain Latin letters."),
   })
   .required();
 
-const Loginform = () => {
+const Loginform = ({ authStore, loginDispatch }) => {
   const {
     handleSubmit,
     control,
@@ -28,7 +28,10 @@ const Loginform = () => {
   } = useForm<Inputs>({
     resolver: yupResolver(schema),
   });
-  const onSubmit: SubmitHandler<Inputs> = (data) => console.log(data);
+
+  const onSubmit: SubmitHandler<Inputs> = (data) => {
+    loginDispatch(data);
+  };
   return (
     <AuthPage>
       <LoginForm>
@@ -69,9 +72,19 @@ const Loginform = () => {
             )}
           </Form.Item>
 
+          {authStore.authenticationError.length > 0 &&
+            authStore.authenticationError.map((er, i) => (
+              <Alert key={`er${i}`} type="error" message={er.message} />
+            ))}
+          {authStore.authenticationError.length > 0 && <Divider />}
+
           <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
-            <Button type="primary" htmlType="submit">
-              Submit
+            <Button
+              type="primary"
+              htmlType="submit"
+              disabled={authStore.authenticating}
+            >
+              {authStore.authenticating ? "Logging.." : " Submit"}
             </Button>
           </Form.Item>
         </form>
