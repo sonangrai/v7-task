@@ -1,4 +1,5 @@
 import Head from "next/head";
+import styled from "styled-components";
 
 /**
  *
@@ -20,8 +21,21 @@ const Layout = ({ children, title, description }) => {
         <meta property="Twitter:description" content={description} />
       </Head>
       {children}
+      <CopyRight>
+        Done by:
+        <a href="https://sonahangrai.com.np" target="_blank" rel="noreferrer">
+          Rai Sonahang
+        </a>
+      </CopyRight>
     </>
   );
 };
 
 export default Layout;
+
+const CopyRight = styled.div`
+  position: fixed;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+`;
