@@ -5,6 +5,9 @@ import {
   loginError,
   loginSuccess,
   logout,
+  signup,
+  signupError,
+  signupSuccess,
 } from "redux/actions/auth";
 
 const initialState: Iauth = {
@@ -14,6 +17,9 @@ const initialState: Iauth = {
   authenticationError: [],
 
   user: {},
+
+  signing: false,
+  signupError: [],
 };
 
 const authReducers = createReducer(initialState, {
@@ -52,6 +58,26 @@ const authReducers = createReducer(initialState, {
     state.isAuthenticated = false;
     state.user = {};
     localStorage.removeItem("v7auth");
+  },
+
+  //Signup
+  [signup.type]: (state) => {
+    state.signing = true;
+  },
+
+  //Signup success
+  [signupSuccess.type]: (state, action) => {
+    state.signing = false;
+    state.user = action.payload.data.data;
+    state.signupError = [];
+    state.isAuthenticated = true;
+    localStorage.setItem("v7auth", JSON.stringify(action.payload.data.data));
+  },
+
+  //Signup Error
+  [signupError.type]: (state, action) => {
+    state.signing = false;
+    state.signupError = action.payload;
   },
 });
 
