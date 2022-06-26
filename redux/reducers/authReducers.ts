@@ -68,10 +68,13 @@ const authReducers = createReducer(initialState, {
   //Signup success
   [signupSuccess.type]: (state, action) => {
     state.signing = false;
-    state.user = action.payload.data.data;
+    state.user = action.payload.data.data.register;
     state.signupError = [];
     state.isAuthenticated = true;
-    localStorage.setItem("v7auth", JSON.stringify(action.payload.data.data));
+    localStorage.setItem(
+      "v7auth",
+      JSON.stringify(action.payload.data.data.register)
+    );
   },
 
   //Signup Error

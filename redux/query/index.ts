@@ -34,7 +34,7 @@ export const signupApi = async (data) => {
     apiUrl,
     {
       query: `mutation register($username: String!,$password: String!,$confirmPassword: String!, $email: String!) {
-                    register(registerInput :{username: $username, password: $password. confirmPassword: $confirmPassword email: $email}){
+                    register(registerInput :{username: $username, password: $password, confirmPassword: $confirmPassword email: $email}){
                       username,
                       email
                     }

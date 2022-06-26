@@ -26,7 +26,7 @@ const schema = yup
   })
   .required();
 
-const Loginform = ({ authStore, loginDispatch }) => {
+const Loginform = ({ authStore, signupDispatch }) => {
   const {
     handleSubmit,
     control,
@@ -36,8 +36,7 @@ const Loginform = ({ authStore, loginDispatch }) => {
   });
 
   const onSubmit: SubmitHandler<Inputs> = (data) => {
-    //loginDispatch(data);
-    console.log(data);
+    signupDispatch(data);
   };
   return (
     <AuthPage>
@@ -81,19 +80,19 @@ const Loginform = ({ authStore, loginDispatch }) => {
             )}
           </Form.Item>
 
-          {authStore.authenticationError.length > 0 &&
-            authStore.authenticationError.map((er, i) => (
+          {authStore.signupError.length > 0 &&
+            authStore.signupError.map((er, i) => (
               <Alert key={`er${i}`} type="error" message={er.message} />
             ))}
-          {authStore.authenticationError.length > 0 && <Divider />}
+          {authStore.signupError.length > 0 && <Divider />}
 
           <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
             <Button
               type="primary"
               htmlType="submit"
-              disabled={authStore.authenticating}
+              disabled={authStore.signing}
             >
-              {authStore.authenticating ? "Logging.." : " Submit"}
+              {authStore.signing ? "Signing.." : " Sign Up"}
             </Button>
           </Form.Item>
         </form>

@@ -4,10 +4,10 @@ import Layout from "../components/layout/Layout";
 import { connect } from "react-redux";
 import { useEffect } from "react";
 
-import { login } from "../redux/actions/auth";
+import { signup } from "../redux/actions/auth";
 import { useRouter } from "next/router";
 
-function Login({ auth, login }) {
+function Login({ auth, signup }) {
   const router = useRouter();
 
   //Redirecting if user is authenticated
@@ -20,7 +20,7 @@ function Login({ auth, login }) {
 
   return (
     <Layout title="Sign Up" description="Sign Up Page">
-      <Signupform loginDispatch={login} authStore={auth} />
+      <Signupform signupDispatch={signup} authStore={auth} />
     </Layout>
   );
 }
@@ -29,6 +29,6 @@ const mapStateToProps = (state) => ({
   auth: state.auth,
 });
 
-const mapDispatchToProps = { login };
+const mapDispatchToProps = { signup };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Login);
